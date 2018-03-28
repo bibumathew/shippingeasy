@@ -5,18 +5,26 @@ class Order(object):
     def __init__(self, store_key):
         self.store_key = store_key
 
-    def create(self):
-        pass
+    def create(self, values):
+        data = {"orders": values}
+        res = Client.send(
+            "POST", "/api/stores/{}/orders".format(self.store_key), None, data)
+        return res.json()
 
-    def update_recipient(self):
-        pass
+    def update_recipient(self, external_order_id, recipient_data):
+        data = {"recipient": recipient_data}
+        res = Client.send(
+            "PUT", "/api/stores/{}/orders/{}/recipient".format(
+                self.store_key, external_order_id), None, data
+        )
+        return res.json()
 
-    def update_status(self):
-        pass
-
-    @classmethod
-    def find(cls, id):
-        res = Client.send("GET", "/api/orders/{}".format(id))
+    def update_status(self, external_order_id, new_status):
+        data = {"order": {"order_status": new_status}}
+        res = Client.send(
+            "PUT", "/api/stores/{}/orders/{}/status".format(
+                self.store_key, external_order_id), None, data
+        )
         return res.json()
 
     def find_by_store(self, external_store_id):
@@ -30,10 +38,13 @@ class Order(object):
                           "/api/stores/{}/orders".format(self.store_key),
                           params)
         return res.json()
-        pass
+
+    @classmethod
+    def find(cls, id):
+        res = Client.send("GET", "/api/orders/{}".format(id))
+        return res.json()
 
     @classmethod
     def find_all(cls, params=None):
         res = Client.send("GET", "/api/orders", params)
         return res.json()
-
