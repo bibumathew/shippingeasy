@@ -1,0 +1,5 @@
+api:
+  key: XXXX
+  secret: XXXX
+
+base_url: https://api.shippingeasy.com
