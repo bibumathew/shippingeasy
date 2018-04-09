@@ -34,12 +34,12 @@ class Client(object):
         return "".join([path, "?", urllib.parse.urlencode(sign_params)])
 
     @classmethod
-    def send(cls, method, path, params=None, json_data=None):
+    def send(cls, method, path, params=None, json_data=None, **kwargs):
         signed_url = urllib.parse.urljoin(
             cls.base_url,
             cls.get_signed_url(method.upper(), path, params, json_data)
         )
         res = requests.request(method, signed_url, params=params,
-                               json=json_data)
+                               json=json_data,**kwargs)
         res.raise_for_status()
         return res
