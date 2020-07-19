@@ -29,7 +29,7 @@ source venv/bin/activate
 make clean install
 ```
 
-*command to run the merge script* 
+*command to run the  script* 
 ```
 make wpe_merge i=<input-csv-file-path> o=<ouput-csv-file-path>
 ```
