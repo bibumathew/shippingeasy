@@ -24,27 +24,18 @@ source venv/bin/activate
 ##### Docs
 ```/docs/build/html/index.html```
 
-*command to install the necessary packages*
+
+##### MakeFile commands
+
 ```
-make clean install
+usage: make {target}
+Available development targets
+
+  install        - install required packages
+  clean          - clean python cache
+  wpe_merge      - i=<input_file> o=<output_file> input and output csv file
+  testall        - run all of the tests
+  unittest       - run all of  unit tests
+  functionaltest - run all functional tests
 ```
 
-*command to run the  script* 
-```
-make wpe_merge i=<input-csv-file-path> o=<ouput-csv-file-path>
-```
-
-*Command to run all tests*
-```
-make testall
-```
-
-*command to run all unit test*
-```
-make unittest
-```
-
-*command to run all functional test*
-```
-make functionaltest
-```
